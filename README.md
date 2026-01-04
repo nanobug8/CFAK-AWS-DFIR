@@ -143,6 +143,7 @@ This project is in **Beta**. We welcome Pull Requests!
 
 - [x] Amazon Linux 2 / 2023 Support
 - [x] Ubuntu Support
+- [x] RHEL Support
 - [ ] **Windows Support** (Coming Soon)
 - [ ] EBS Snapshot Acquisition
 - [ ] Automated Volatility Analysis
