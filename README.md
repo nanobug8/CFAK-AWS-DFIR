@@ -50,7 +50,7 @@ The current CloudFormation stack is designed to be **portable** and does **not c
 ## 🏗️ Architecture
 
 ```mermaid
-graph TD
+graph LR
 
     Admin[Admin / Security Tool]
         -->|Set Forensic=True| EC2[Target EC2 Instance]
