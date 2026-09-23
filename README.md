@@ -83,39 +83,6 @@ graph TD
         -->|Logs| CW[CloudWatch Logs]
 ```
 
-### Workflow
-
-```text
-EC2 tag changed
-      │
-      ▼
-Forensic=True
-      │
-      ▼
-EventBridge
-      │
-      ▼
-Lambda Orchestrator
-      │
-      ▼
-ECS Fargate Task
-      │
-      ├── Upload AVML / WinPMEM → S3
-      │
-      ├── Detect EC2 platform
-      │
-      └── Send SSM command
-               │
-               ▼
-          Target EC2
-               │
-               ├── Download forensic tool
-               ├── Acquire RAM
-               └── Upload evidence → S3
-```
-
-The EventBridge rule uses AWS's **Tag Change on Resource** event source (`aws.tag`) and filters EC2 instances whose `Forensic` tag changes to `True`.
-
 ---
 
 ## 🐳 Docker Image
