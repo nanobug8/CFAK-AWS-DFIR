@@ -273,6 +273,25 @@ Example:
 > `AmazonS3ExpressFullAccess` and `AmazonS3FilesFullAccess` are not substitutes for permissions to a standard Amazon S3 bucket. C-FAK uses a normal S3 bucket.
 
 ---
+## 📋 Prerequisites
+
+| Requirement                         | Required | Purpose                                           |
+| :---------------------------------- | :------: | :------------------------------------------------ |
+| AWS account + supported region      |     ✅    | Run AWS services                                  |
+| Existing VPC                        |     ✅    | ECS/Fargate                                       |
+| **Public subnet for Fargate**       |     ✅    | Pull Docker image and AWS connectivity            |
+| Internet connectivity for Fargate   |     ✅    | Pull `nanobug8/cfak:latest`                       |
+| Target EC2 instance                 |     ✅    | System to acquire                                 |
+| **SSM Agent + managed instance**    |     ✅    | Execute forensic commands                         |
+| **Existing EC2 IAM Role**           |     ✅    | SSM + S3 access from commands executed on the EC2 |
+| **AWS CLI on EC2**                  |     ✅    | Download forensic tools and upload evidence       |
+| Standard S3 bucket                  |     ✅    | Store tools and evidence                          |
+| EventBridge Tag Change              |     ✅    | Trigger forensic acquisition                      |
+
+[!IMPORTANT]
+The target EC2 can keep any existing IAM Role, but it must provide the permissions required by SSM and by the S3 operations performed during acquisition (s3:GetObject for tools/* and s3:PutObject for evidence/*).
+
+---
 
 ## 🚀 Deployment
 
@@ -412,24 +431,6 @@ The CloudFormation stack creates:
 | **Lambda Permission**      | Allows EventBridge invocation |
 
 The stack does **not** create resources for the target EC2 IAM role.
-
----
-
-## 🗺️ Roadmap
-
-* [x] Automated event-driven acquisition
-* [x] Amazon Linux support
-* [x] Ubuntu support
-* [x] RHEL support
-* [x] Automated S3 evidence storage
-* [x] Fargate-based forensic worker
-* [x] SSM-based remote acquisition
-* [x] Portable IAM architecture
-* [ ] Windows acquisition hardening and validation
-* [ ] EBS Snapshot Acquisition
-* [ ] Automated Volatility Analysis
-* [ ] Extended forensic artifact collection
-* [ ] Multi-instance acquisition orchestration
 
 ---
 
